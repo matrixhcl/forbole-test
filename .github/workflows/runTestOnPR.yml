@@ -5,6 +5,7 @@ on:
 
 jobs:
   eslint-and-test:
+    name: run eslint, tsc, unit test and e2e test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
