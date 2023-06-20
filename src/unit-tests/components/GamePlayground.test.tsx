@@ -30,9 +30,7 @@ vi.mock("../../hooks/useTicTacToe", () => {
 });
 
 vi.mock("../../db", async () => {
-  const actual = await vi.importActual<typeof import("../../../db")>(
-    "../../db"
-  );
+  const actual = await vi.importActual<typeof import("../../db")>("../../db");
   return {
     ...actual,
     createNewGameRound: mockCreateNewGameRoundFn,

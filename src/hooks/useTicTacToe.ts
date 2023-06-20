@@ -111,8 +111,10 @@ export const makeMove = (
   });
   if (checkWin(editingGameRound.board, row, col)) {
     editingGameRound.winner = currentPlayer;
+    editingGameRound.status = "end";
   } else if (editingGameRound.moves.length === 9) {
     editingGameRound.winner = Player.None;
+    editingGameRound.status = "end";
   } else {
     editingGameRound.currentPlayer =
       currentPlayer === Player.X ? Player.O : Player.X;
@@ -144,12 +146,7 @@ export const makeMove = (
 export const useTicTacToe = () => {
   const currentGameRounds =
     useLiveQuery(async () => {
-      return await db.gamerounds
-        .where("status")
-        .equals("playing")
-        .limit(1)
-        .reverse()
-        .toArray();
+      return await db.gamerounds.limit(1).reverse().toArray();
     }) ?? [];
   const currentGameRound = currentGameRounds[0];
   const saveMove = async (
