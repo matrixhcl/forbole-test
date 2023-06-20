@@ -3,7 +3,7 @@ name: Run unit test, e2e test and eslint when PR created
 on:
   pull_request:
     branches:
-      - develop
+      - master
 jobs:
   eslint-and-test:
     runs-on: ubuntu-latest
