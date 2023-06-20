@@ -16,19 +16,23 @@ test("create new pvp game and the game should be playable when clicking pvp new 
     page.getByText("status: playing"),
     page.getByText("winner: ", { exact: true }),
   ]);
-  await page
-    .getByTestId("gameboard-large")
-    .getByTestId("gameboard-piece-0")
-    .click();
+  const currentPlayerO = await page.getByText("current player: O");
+  await expect(currentPlayerO).toBeInViewport(),
+    await page
+      .getByTestId("gameboard-large")
+      .getByTestId("gameboard-piece-0")
+      .click();
   const OImg = await page
     .getByTestId("gameboard-large")
     .getByTestId("gameboard-piece-0")
     .getByAltText("O");
+  const currentPlayerX = await page.getByText("current player: X");
   await Promise.all([
     expect(activeGameRoundContainer).toBeInViewport(),
     expect(statusTitle).toBeInViewport(),
     expect(winnerRow).toBeInViewport(),
     expect(OImg).toBeInViewport(),
+    expect(currentPlayerX).toBeInViewport(),
   ]);
 });
 
