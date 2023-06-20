@@ -13,12 +13,12 @@ function GameBoard(props: Props) {
   return (
     <div
       data-testid={`gameboard-${size}`}
-      className={`grid grid-cols-3 grid-rows-3 bg-black ${sizeClasses}`}
+      className={`grid grid-cols-3 grid-rows-3 bg-[#c3c5eb] ${sizeClasses}`}
     >
       {board.flat().map((boardPiece, index) => (
         <div
           data-testid={`gameboard-piece-${index}`}
-          className="bg-white p-1"
+          className="bg-gray-600 p-1"
           onClick={() => {
             if (move) move(index);
           }}
