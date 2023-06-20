@@ -78,3 +78,18 @@ test("history should be updated correctly when game is created", async ({
   const secondGameHistoryContainer = await page.getByTestId("game-history-2");
   await expect(secondGameHistoryContainer).toBeInViewport();
 });
+
+test("history should be cleared when clear data button is clicked", async ({
+  page,
+}) => {
+  await page.goto("/");
+  //create 2 new games, there should be 2 history on the UI, logic is tested in previous test
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
+  await expect(page.getByTestId("game-history-1")).toHaveCount(1);
+  await expect(page.getByTestId("game-history-2")).toHaveCount(1);
+  // click the clear record button, both history should be removed from the UI
+  await page.getByText("Clear All Record").click();
+  await expect(page.getByTestId("game-history-1")).toHaveCount(0);
+  await expect(page.getByTestId("game-history-2")).toHaveCount(0);
+});

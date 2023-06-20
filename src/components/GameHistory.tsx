@@ -6,8 +6,8 @@ function GameHistory() {
     async () => await db.gamerounds.orderBy("id").reverse().toArray()
   );
   return (
-    <section className="col-span-2 overflow-y-scroll">
-      <h2 className="p-2 text-white">Game History</h2>
+    <section className="lg:col-span-2 col-span-4 overflow-y-scroll">
+      <h2 className="p-2 text-white bg-gray-600 sticky top-0">Game History</h2>
       {GameRounds &&
         GameRounds.map((round) => (
           <div

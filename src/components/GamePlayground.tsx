@@ -13,7 +13,7 @@ function GamePlayground() {
   };
 
   return (
-    <section className="col-span-10 row-span-1 flex flex-col items-center justify-center">
+    <section className="lg:col-span-10 col-span-8 row-span-1 flex flex-col items-center justify-center">
       {currentGameRound && (
         <>
           <div data-testid="active-game-round">
