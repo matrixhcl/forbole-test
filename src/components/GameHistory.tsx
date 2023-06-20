@@ -15,8 +15,8 @@ function GameHistory() {
             className="border-2 p-2 rounded m-2"
             data-testid={`game-history-${round.id}`}
           >
-            <div>Game ID: {round.id}</div>
-            <div>Winner: {round.winner}</div>
+            <div className="text-white">Game ID: {round.id}</div>
+            <div className="text-white">Winner: {round.winner}</div>
             <div className="flex justify-center p-3">
               <GameBoard size="small" board={round.board}></GameBoard>
             </div>
