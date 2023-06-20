@@ -65,6 +65,23 @@ test("create new pve game when clicking pve new game button is clicked, and the 
   ]);
 });
 
+test("should be able to finish a full pvp game", async ({ page }) => {
+  await page.goto("/");
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
+  const [activeGameRoundContainer, gameboard] = await Promise.all([
+    page.getByTestId("active-game-round"),
+    page.getByTestId("gameboard-large"),
+  ]);
+  const clickSequence = [0, 4, 1, 5, 2];
+  // O get the full first row, should win
+  for (const index of clickSequence) {
+    await gameboard.getByTestId(`gameboard-piece-${index}`).click();
+  }
+  await expect(
+    activeGameRoundContainer.getByText(`winner: ${Player.O}`)
+  ).toBeInViewport();
+});
+
 test("history should be updated correctly when game is created", async ({
   page,
 }) => {
