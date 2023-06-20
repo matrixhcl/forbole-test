@@ -182,6 +182,7 @@ describe("useTicTacToe makeMove function", () => {
         [Player.O, Player.None, Player.None],
       ],
       currentPlayer: Player.O,
+      status: "end",
     };
     expect(step5Result).toStrictEqual(step5Data);
   });
@@ -285,6 +286,7 @@ describe("useTicTacToe makeMove function", () => {
         [Player.O, Player.O, Player.X],
       ],
       winner: Player.None,
+      status: "end",
     });
   });
 });
