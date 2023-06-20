@@ -35,7 +35,7 @@ function GamePlayground() {
       )}
       {!currentGameRound && (
         <div className="text-white">
-          {"Please click NEW GAME (PVE) or NEW GAME (PVE) to start a game"}
+          {"Please click NEW GAME (PVE) or NEW GAME (PVP) to start a game"}
         </div>
       )}
       <div className="mt-3">

@@ -10,7 +10,7 @@ test("create new pvp game and the game should be playable when clicking pvp new 
   page,
 }) => {
   await page.goto("/");
-  await page.getByText("NEW GAME (PVP)").click();
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
   const [activeGameRoundContainer, statusTitle, winnerRow] = await Promise.all([
     page.getByTestId("active-game-round"),
     page.getByText("status: playing"),
@@ -69,10 +69,10 @@ test("history should be updated correctly when game is created", async ({
   page,
 }) => {
   await page.goto("/");
-  await page.getByText("NEW GAME (PVP)").click();
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
   let firstGameHistoryContainer = await page.getByTestId("game-history-1");
   await expect(firstGameHistoryContainer).toBeInViewport();
-  await page.getByText("NEW GAME (PVP)").click();
+  await page.getByText("NEW GAME (PVP)", { exact: true }).click();
   // both history should exist on the list
   firstGameHistoryContainer = await page.getByTestId("game-history-1");
   const secondGameHistoryContainer = await page.getByTestId("game-history-2");
