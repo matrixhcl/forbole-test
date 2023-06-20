@@ -11,9 +11,13 @@ function GameBoard(props: Props) {
   const { board, move, size } = props;
   const sizeClasses = size === "large" ? "gap-3 w-80 h-80" : "gap-1 w-32 h-32";
   return (
-    <div className={`grid grid-cols-3 grid-rows-3 bg-black ${sizeClasses}`}>
+    <div
+      data-testid={`gameboard-${size}`}
+      className={`grid grid-cols-3 grid-rows-3 bg-black ${sizeClasses}`}
+    >
       {board.flat().map((boardPiece, index) => (
         <div
+          data-testid={`gameboard-piece-${index}`}
           className="bg-white p-1"
           onClick={() => {
             if (move) move(index);
