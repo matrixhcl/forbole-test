@@ -1,7 +1,5 @@
-import circleSvg from "../assets/circle.svg";
-import crossSvg from "../assets/cross.svg";
 import { useTicTacToe } from "../hooks/useTicTacToe";
-import { Player, clearGameRoundsRecord, createNewGameRound } from "../db";
+import { clearGameRoundsRecord, createNewGameRound } from "../db";
 import GameBoard from "./GameBoard";
 
 function GamePlayground() {

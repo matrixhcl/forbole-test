@@ -1,12 +1,4 @@
-import {
-  expect,
-  it,
-  describe,
-  vi,
-  afterEach,
-  beforeEach,
-  vitest,
-} from "vitest";
+import { expect, it, describe, vi } from "vitest";
 import { checkWin } from "../../hooks/useTicTacToe";
 import { Player } from "../../db";
 
