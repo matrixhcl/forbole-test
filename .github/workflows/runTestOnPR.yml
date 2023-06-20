@@ -27,6 +27,6 @@ jobs:
       - name: run eslint
         run: yarn lint
       - name: Run unit test with vitest
-        run: yarn test
+        run: yarn test:ci
       - name: Run e2e test with paywright
         run: yarn test:e2e

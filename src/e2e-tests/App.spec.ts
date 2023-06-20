@@ -36,7 +36,7 @@ test("create new pve game when clicking pve new game button is clicked, and the 
   page,
 }) => {
   await page.goto("/");
-  await page.getByText("NEW GAME (PVE)").click();
+  await page.getByText("NEW GAME (PVE)", { exact: true }).click();
   const [activeGameRoundContainer, statusTitle, winnerRow] = await Promise.all([
     page.getByTestId("active-game-round"),
     page.getByText("status: playing"),
