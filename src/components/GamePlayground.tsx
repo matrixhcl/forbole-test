@@ -19,6 +19,9 @@ function GamePlayground() {
           <div data-testid="active-game-round">
             <div className="text-white">status: {currentGameRound.status}</div>
             <div className="text-white">winner: {currentGameRound.winner}</div>
+            <div className="text-white">
+              {`current player: ${currentGameRound.currentPlayer}`}
+            </div>
             <GameBoard
               move={move}
               size={"large"}
