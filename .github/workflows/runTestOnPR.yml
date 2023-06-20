@@ -24,6 +24,8 @@ jobs:
         run: yarn install
       - name: setup playwright
         run: npx playwright install --with-deps
+      - name: run tsc for typecheck
+        run: yarn tsc
       - name: run eslint
         run: yarn lint
       - name: Run unit test with vitest
