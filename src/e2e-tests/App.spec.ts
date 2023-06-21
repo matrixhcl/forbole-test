@@ -99,7 +99,10 @@ test("should be able to finish a full pve game", async ({ page }) => {
     .getByTestId("gameboard-piece-0")
     .click();
   // X is moved by bot so it's completely random, read move set data directly from indexeddb to determine next step
-  const playWithBot = async () => {
+  const playWithBot = async (): Promise<{
+    winner: Player;
+    numberOfMoves: number;
+  }> => {
     const activeGameRound = (await page.evaluate(() => {
       return new Promise((resolve) => {
         const openDBRequest = indexedDB.open("db");
@@ -136,7 +139,7 @@ test("should be able to finish a full pve game", async ({ page }) => {
     if (!nextMove) {
       throw new Error("No next move found");
     }
-    const nextMoveIndex = nextMove.row * 3 + nextMove.col;
+    const nextMoveIndex = nextMove["row"] * 3 + nextMove["col"];
     // click the next move
     await gameboard.getByTestId(`gameboard-piece-${nextMoveIndex}`).click();
     // recursive function until winner is set
