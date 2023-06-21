@@ -25,14 +25,12 @@ export interface GameRound {
 }
 
 class Database extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
   gamerounds!: Table<GameRound>;
 
   constructor() {
     super("db");
     this.version(1).stores({
-      gamerounds: "++id, gameMode, currentPlayer, winner, status", // Primary key and indexed props
+      gamerounds: "++id, gameMode, currentPlayer, winner, status",
     });
   }
 }
