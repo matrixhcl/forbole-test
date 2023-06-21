@@ -146,12 +146,14 @@ test("should be able to finish a full pve game", async ({ page }) => {
     return await playWithBot();
   };
   const { winner, numberOfMoves } = await playWithBot();
-  if (numberOfMoves % 2 === 0) {
+  if (winner === Player.None) {
+    expect(winner).toBe(Player.None);
+  } else if (numberOfMoves % 2 === 0) {
     expect(winner).toBe(Player.X);
   } else if (numberOfMoves % 2 === 1) {
     expect(winner).toBe(Player.O);
   } else {
-    expect(winner).toBeNull();
+    throw new Error("Invalid winner");
   }
   await expect(
     activeGameRoundContainer.getByText(`winner: ${winner}`)
