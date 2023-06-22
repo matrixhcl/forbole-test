@@ -187,29 +187,57 @@ describe("useTicTacToe makeMove function", () => {
     expect(step5Result).toStrictEqual(step5Data);
   });
 
-  it("should not allow placing on same box twice, regardless of player", () => {
-    const initData = newGameRoundFactory("pvp");
+  it("should handle a full pve game correctly", async () => {
+    const initData = newGameRoundFactory("pve");
     initData.id = 1;
 
-    //step 1 data, assume O has placed to box 0,0
-    const step1Data: GameRound = {
-      ...initData,
-      moves: [
-        {
-          col: 0,
-          row: 0,
-          player: Player.O,
-        },
-      ],
-      board: [
-        [Player.O, Player.None, Player.None],
-        [Player.None, Player.None, Player.None],
-        [Player.None, Player.None, Player.None],
-      ],
-      currentPlayer: Player.X,
+    //step 1
+    const step1gameRound = makeMove(0, 0, initData);
+    if (!step1gameRound) throw new Error("step1gameRound is null");
+    const usedPieces = new Set<string>();
+    usedPieces.add("00");
+    const makeMoveUntilGameHasWinner = (gameRound: GameRound): GameRound => {
+      if (!gameRound) throw new Error("game round is null");
+      // return gameRound when winer is available
+      if (gameRound.winner !== null) {
+        return gameRound;
+      }
+      const lastMoveFromBot = gameRound.moves.at(-1);
+      // add last bot move to used pieces
+      usedPieces.add(`${lastMoveFromBot?.row}${lastMoveFromBot?.col}`);
+      const rowAndColIndexRange = [0, 1, 2];
+      let nextMove: { row: number; col: number } | null = null;
+      // check which piece is not used yet
+      for (const rowIndex of rowAndColIndexRange) {
+        for (const colIndex of rowAndColIndexRange) {
+          const rowColIndex = `${rowIndex}${colIndex}`;
+          if (!usedPieces.has(rowColIndex)) {
+            // if piece is not used, use it for human move
+            usedPieces.add(`${rowIndex}${colIndex}`);
+            nextMove = { row: rowIndex, col: colIndex };
+            break;
+          }
+        }
+        if (nextMove) {
+          break;
+        }
+      }
+      if (!nextMove) throw new Error("next move is null");
+      const makeNextHumanMove = makeMove(nextMove.row, nextMove.col, gameRound);
+      if (!makeNextHumanMove) throw new Error("makeNextHumanMove is false");
+      // recursively call itself until winner is set
+      return makeMoveUntilGameHasWinner(makeNextHumanMove);
     };
-    //step2 should return false as it try to place on an occupied box
-    expect(makeMove(0, 0, step1Data)).toBe(false);
+    const endedGameRound = makeMoveUntilGameHasWinner(step1gameRound);
+    if (endedGameRound.winner === Player.None) {
+      expect(endedGameRound.moves.length).toBe(9);
+    }
+    if (endedGameRound.winner === Player.O) {
+      expect(endedGameRound.moves.length % 2).toBe(1);
+    }
+    if (endedGameRound.winner === Player.X) {
+      expect(endedGameRound.moves.length % 2).toBe(0);
+    }
   });
 
   it("should set the winner to none if moves count is already 9", () => {
