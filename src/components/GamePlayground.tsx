@@ -13,7 +13,7 @@ function GamePlayground() {
   };
 
   return (
-    <section className="lg:col-span-10 col-span-8 row-span-1 flex flex-col items-center justify-center">
+    <section className="col-span-8 row-span-1 flex flex-col items-center justify-center lg:col-span-10">
       {currentGameRound && (
         <>
           <div data-testid="active-game-round">
@@ -40,13 +40,13 @@ function GamePlayground() {
       )}
       <div className="mt-3">
         <button
-          className="rounded bg-blue-500 p-3 text-white mr-5"
+          className="mr-5 rounded bg-blue-500 p-3 text-white"
           onClick={() => createNewGameRound("pve")}
         >
           {"NEW GAME (PVE)"}
         </button>
         <button
-          className="rounded bg-blue-500 p-3 text-white mr-5"
+          className="mr-5 rounded bg-blue-500 p-3 text-white"
           onClick={() => createNewGameRound("pvp")}
         >
           {"NEW GAME (PVP)"}
