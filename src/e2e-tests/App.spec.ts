@@ -128,14 +128,18 @@ test("should be able to finish a full pve game", async ({ page }) => {
     moves.forEach((move) => usedPieces.add(`${move.row}${move.col}`));
     const rowAndColIndexRange = [0, 1, 2];
     let nextMove: { row: number; col: number } | null = null;
-    rowAndColIndexRange.forEach((rowIndex) => {
-      rowAndColIndexRange.forEach((colIndex) => {
+    for (const rowIndex of rowAndColIndexRange) {
+      for (const colIndex of rowAndColIndexRange) {
         const rowColIndex = `${rowIndex}${colIndex}`;
         if (!usedPieces.has(rowColIndex)) {
           nextMove = { row: rowIndex, col: colIndex };
+          break;
         }
-      });
-    });
+      }
+      if (nextMove) {
+        break;
+      }
+    }
     if (!nextMove) {
       throw new Error("No next move found");
     }
