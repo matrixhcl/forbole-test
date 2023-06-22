@@ -6,13 +6,13 @@ function GameHistory() {
     async () => await db.gamerounds.orderBy("id").reverse().toArray()
   );
   return (
-    <section className="lg:col-span-2 col-span-4 overflow-y-scroll">
-      <h2 className="p-2 text-white bg-gray-600 sticky top-0">Game History</h2>
+    <section className="col-span-4 overflow-y-scroll lg:col-span-2">
+      <h2 className="sticky top-0 bg-gray-600 p-2 text-white">Game History</h2>
       {GameRounds &&
         GameRounds.map((round) => (
           <div
             key={round.id}
-            className="border-2 p-2 rounded m-2"
+            className="m-2 rounded border-2 p-2"
             data-testid={`game-history-${round.id}`}
           >
             <div className="text-white">Game ID: {round.id}</div>
